@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     // clicker
+    [Header("clicker")]
     public Text scoreText;
     public float currentScore;
     public float hitPower;
@@ -13,18 +14,25 @@ public class Game : MonoBehaviour
     public float x;
 
     // shop
+    [Header("shop")]
     public int shop1Price;
     public Text shop1Text;
     public int shop2Price;
     public Text shop2Text;
 
     // amount
+    [Header("amount")]
     public Text amount1Text;
     public int amount1;
     public float amount1Profit;
     public Text amount2Text;
     public int amount2;
     public float amount2Profit;
+
+    // upgrade
+    [Header("upgrade")]
+    public float upgradePrice;
+    public Text upgradeText;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +59,10 @@ public class Game : MonoBehaviour
         // amount
         amount1Text.text = $"Tier 1: {amount1} arts $: {amount1Profit}/s";
         amount2Text.text = $"Tier 2: {amount2} arts $: {amount2Profit}/s";
+
+        // upgrade
+        upgradeText.text = $"Cost: {upgradePrice}$";
+
     }
 
     public void Hit()
@@ -78,6 +90,16 @@ public class Game : MonoBehaviour
             amount2Profit += 5;
             x += 5;
             shop2Price += 125;
+        }
+    }
+
+    public void Upgrade()
+    {
+        if (currentScore >= upgradePrice)
+        {
+            currentScore -= upgradePrice;
+            hitPower *= 2;
+            upgradePrice *= 3;
         }
     }
 }
