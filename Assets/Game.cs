@@ -42,6 +42,34 @@ public class Game : MonoBehaviour
         hitPower = 1;
         scoreIncreasedPerSecond = 1;
         x = 0;
+
+        // set default value befor loading
+        // 读取的时候已经设置了默认值，这一步好像是多余的？
+        // shop1Price = 1;
+        // shop2Price = 2;
+        // amount1 = 0;
+        // amount1Profit = 1;
+        // amount2 = 0;
+        // amount2Profit = 5;
+
+        // reset line
+        // PlayerPrefs.DeleteAll();
+
+        // load
+        currentScore = PlayerPrefs.GetInt("currentScore", 0);
+        hitPower = PlayerPrefs.GetInt("hitPower", 1);
+        x = PlayerPrefs.GetInt("x", 0);
+        upgradePrice = PlayerPrefs.GetInt("upgradePrice", 1);
+
+        shop1Price = PlayerPrefs.GetInt("shop1Price", 1);
+        amount1 = PlayerPrefs.GetInt("amount1", 0);
+        amount1Profit = PlayerPrefs.GetInt("amount1Profit", 1);
+        shop2Price = PlayerPrefs.GetInt("shop2Price", 2);
+        amount2 = PlayerPrefs.GetInt("amount2", 0);
+        amount2Profit = PlayerPrefs.GetInt("amount2Profit", 5);
+ 
+
+
     }
 
     // Update is called once per frame
@@ -62,6 +90,19 @@ public class Game : MonoBehaviour
 
         // upgrade
         upgradeText.text = $"Cost: {upgradePrice}$";
+
+        // save
+        PlayerPrefs.SetInt("currentScore", (int)currentScore);
+        PlayerPrefs.SetInt("hitPower", (int)hitPower);
+        PlayerPrefs.SetInt("x", (int)x);
+        PlayerPrefs.SetInt("upgradePrice", (int)upgradePrice);
+
+        PlayerPrefs.SetInt("shop1Price", (int)shop1Price);
+        PlayerPrefs.SetInt("amount1", (int)amount1);
+        PlayerPrefs.SetInt("amount1Profit", (int)amount1Profit);
+        PlayerPrefs.SetInt("shop2Price", (int)shop2Price);
+        PlayerPrefs.SetInt("amount2", (int)amount2);
+        PlayerPrefs.SetInt("amount2Profit", (int)amount2Profit);
 
     }
 
