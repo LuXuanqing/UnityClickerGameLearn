@@ -12,6 +12,20 @@ public class Game : MonoBehaviour
     public float scoreIncreasedPerSecond;
     public float x;
 
+    // shop
+    public int shop1Price;
+    public Text shop1Text;
+    public int shop2Price;
+    public Text shop2Text;
+
+    // amount
+    public Text amount1Text;
+    public int amount1;
+    public float amount1Profit;
+    public Text amount2Text;
+    public int amount2;
+    public float amount2Profit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +42,42 @@ public class Game : MonoBehaviour
         // clicker
         scoreIncreasedPerSecond = x * Time.deltaTime;
         currentScore += scoreIncreasedPerSecond;
-        scoreText.text = $"{currentScore} $";
+        scoreText.text = $"{(int)currentScore} $";
+
+        // shop
+        shop1Text.text = $"Tier 1: {shop1Price} $";
+        shop2Text.text = $"Tier 2: {shop2Price} $";
+
+        // amount
+        amount1Text.text = $"Tier 1: {amount1} arts $: {amount1Profit}/s";
+        amount2Text.text = $"Tier 2: {amount2} arts $: {amount2Profit}/s";
     }
 
     public void Hit()
     {
         currentScore += hitPower;
+    }
+
+    public void Shop1()
+    {
+        if (currentScore >= shop1Price)
+        {
+            currentScore -= shop1Price;
+            amount1 += 1;
+            amount1Profit += 1;
+            x += 1;
+            shop1Price += 25;
+        }
+    }
+    public void Shop2()
+    {
+        if (currentScore >= shop2Price)
+        {
+            currentScore -= shop2Price;
+            amount2 += 1;
+            amount2Profit += 5;
+            x += 5;
+            shop2Price += 125;
+        }
     }
 }
